@@ -393,7 +393,7 @@ var pizzaElementGenerator = function(i) {
 
   return pizzaContainer;
 };
-pizzaElementGenerator();
+
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
@@ -416,12 +416,20 @@ var resizePizzas = function(size) {
   }
 
   changeSliderLabel(size);
-
-  // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (elem, size) {
-    var oldwidth = elem.offsetWidth;
+// ref : https://github.com/sobermoode/frontend-nanodegree-mobile-portfolio/blob/master/views/js/main.js
+    
+    //moving window width outside for loop
     var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldsize = oldwidth / windowwidth;
+    
+    //make one call to document.querySelectorAll(".randomPizzaContainer"), so it wasn't done continueously in for loop
+    var allRandomPizzas = document.querySelectorAll(".randomPizzaContainer");
+    
+    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
+    // function now takes the old width of the pizza images instead of the actual image and making the calculation every
+    // time determineDx() is called.
+    function determineDx (old, size) {
+    //var oldwidth = elem.offsetWidth;
+    var oldsize = old / windowwidth;
 
     // TODO: change to 3 sizes? no more xl?
     // Changes the slider value to a percent width
@@ -445,13 +453,21 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  /* function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+   function changePizzaSizes(size) {
+     // now using the allRandomPizzas array and calculating the offset only once;
+    // passing this value into determineDx() instead of the image
+    /* for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
       var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
       var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-    }
-  }  */
+      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;  */
+    var oldwidth = allRandomPizzas[0].offsetWidth;
+    for (var i = 0; i < allRandomPizzas.length; i++) {
+      var dx = determineDx(oldwidth, size);
+      var newwidth = (oldwidth + dx) + 'px';
+      allRandomPizzas[i].style.width = newwidth;
+     
+   }
+  }  
 
   changePizzaSizes(size);
 
