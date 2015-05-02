@@ -353,7 +353,7 @@ var makeRandomPizza = function() {
 
   return pizza;
 };
-makeRandomPizza();
+
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
   var pizzaContainer,             // contains pizza title, image and list of ingredients
