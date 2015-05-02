@@ -353,7 +353,7 @@ var makeRandomPizza = function() {
 
   return pizza;
 };
-
+makeRandomPizza();
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
   var pizzaContainer,             // contains pizza title, image and list of ingredients
@@ -393,7 +393,7 @@ var pizzaElementGenerator = function(i) {
 
   return pizzaContainer;
 };
-
+pizzaElementGenerator();
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
