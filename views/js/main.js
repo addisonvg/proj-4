@@ -374,7 +374,7 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.classList.add("col-md-6");
 
-  pizzaImage.src = "images/pizza.png";
+  pizzaImage.src = "http://static.wixstatic.com/media/2f00e2_51c84a9517344740a49f2b2f66f0d712.png";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
@@ -427,9 +427,9 @@ var resizePizzas = function(size) {
     // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
     // function now takes the old width of the pizza images instead of the actual image and making the calculation every
     // time determineDx() is called.
-    function determineDx (old, size) {
     //var oldwidth = elem.offsetWidth;
-    var oldsize = old / windowwidth;
+    function determineDx (old, size) {
+      var oldsize = old / windowwidth;
 
     // TODO: change to 3 sizes? no more xl?
     // Changes the slider value to a percent width
@@ -514,9 +514,12 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+//variable to store top scroll
+  var cachedScrollTop = document.body.scrollTop;
+  
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin((cachedScrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -540,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "http://static.wixstatic.com/media/2f00e2_51c84a9517344740a49f2b2f66f0d712.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
