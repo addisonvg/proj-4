@@ -416,7 +416,6 @@ var resizePizzas = function(size) {
   }
 
   changeSliderLabel(size);
-// ref : https://github.com/sobermoode/frontend-nanodegree-mobile-portfolio/blob/master/views/js/main.js
     
     //moving window width outside for loop
     var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
@@ -514,7 +513,7 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-//variable to store top scroll
+//one call for document.body.scrollTop, avoid continuously in for loop
   var cachedScrollTop = document.body.scrollTop;
   
   var items = document.querySelectorAll('.mover');
